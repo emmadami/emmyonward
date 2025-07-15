@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: finance-platform-api
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+
+  - type: web
+    name: finance-platform-frontend
+    env: static
+    buildCommand: cd client && npm install && npm run build
+    staticPublishPath: ./client/dist
+    routes:
+      - type: rewrite
+        source: /api/*
+        destination: https://finance-platform-api.onrender.com/api/*
+      - type: rewrite
+        source: /*
+        destination: /index.html
