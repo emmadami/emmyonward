@@ -1,7 +1,13 @@
-@@ .. @@
-   "scripts": {
-     "dev": "vite",
--    "build": "vite build",
-+    "build": "vite build --outDir dist",
-     "preview": "vite preview"
-   },
+{
+  "name": "finance-platform-client",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --outDir dist",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

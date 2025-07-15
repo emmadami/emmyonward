@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All-in-One Finance Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body class="bg-gray-50">
+    <div id="app">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <h1 class="text-2xl font-bold text-gray-900">FinancePro</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button id="authBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                            Sign In
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Hero Section -->
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">All-in-One Finance Platform</h2>
+                <p class="text-xl text-gray-600 mb-8">Pay bills, trade crypto, exchange gift cards, and more!</p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <!-- Pay Bills -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Pay Bills</h3>
+                    <p class="text-gray-600 mb-4">Pay electricity, water, internet, and other utility bills instantly.</p>
+                    <button class="service-btn w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700" data-service="bills">
+                        Pay Now
+                    </button>
+                </div>
+
+                <!-- Trade Crypto -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Trade Crypto</h3>
+                    <p class="text-gray-600 mb-4">Buy and sell Bitcoin, Ethereum, and other cryptocurrencies.</p>
+                    <button class="service-btn w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700" data-service="crypto">
+                        Trade Now
+                    </button>
+                </div>
+
+                <!-- Gift Cards -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Gift Cards</h3>
+                    <p class="text-gray-600 mb-4">Trade Amazon, iTunes, Google Play, and other gift cards.</p>
+                    <button class="service-btn w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700" data-service="giftcard">
+                        Trade Cards
+                    </button>
+                </div>
+
+                <!-- P2P Trading -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">P2P Trading</h3>
+                    <p class="text-gray-600 mb-4">Direct peer-to-peer trading with other users securely.</p>
+                    <button class="service-btn w-full bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700" data-service="p2p">
+                        Start Trading
+                    </button>
+                </div>
+            </div>
+
+            <!-- Payment Section -->
+            <div class="bg-white p-8 rounded-lg shadow-md mb-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">Accept Payments</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Amount (USD)</label>
+                        <input type="number" id="paymentAmount" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter amount">
+                    </div>
+                    <div class="flex items-end">
+                        <button id="paymentBtn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 font-medium">
+                            Create Payment
+                        </button>
+                    </div>
+                </div>
+                <div id="paymentResult" class="mt-4 hidden"></div>
+            </div>
+
+            <!-- Status Section -->
+            <div id="statusSection" class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">System Status</h3>
+                <div class="flex items-center space-x-2">
+                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <span class="text-green-600 font-medium">All systems operational</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for Services -->
+    <div id="serviceModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg max-w-md w-full mx-4">
+            <h3 id="modalTitle" class="text-xl font-bold text-gray-900 mb-4"></h3>
+            <div id="modalContent"></div>
+            <div class="flex justify-end space-x-4 mt-6">
+                <button id="modalCancel" class="px-4 py-2 text-gray-600 hover:text-gray-800">Cancel</button>
+                <button id="modalSubmit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Stripe
+        const stripe = Stripe('pk_test_your_publishable_key_here');
+
+        // API base URL
+        const API_BASE = '/api';
+
+        // DOM elements
+        const authBtn = document.getElementById('authBtn');
+        const serviceModal = document.getElementById('serviceModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalContent = document.getElementById('modalContent');
+        const modalCancel = document.getElementById('modalCancel');
+        const modalSubmit = document.getElementById('modalSubmit');
+        const paymentBtn = document.getElementById('paymentBtn');
+        const paymentAmount = document.getElementById('paymentAmount');
+        const paymentResult = document.getElementById('paymentResult');
+
+        // Current service
+        let currentService = null;
+
+        // Service button handlers
+        document.querySelectorAll('.service-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                currentService = e.target.dataset.service;
+                openServiceModal(currentService);
+            });
+        });
+
+        // Modal handlers
+        modalCancel.addEventListener('click', closeModal);
+        modalSubmit.addEventListener('click', handleServiceSubmit);
+
+        // Payment handler
+        paymentBtn.addEventListener('click', handlePayment);
+
+        function openServiceModal(service) {
+            const serviceConfig = {
+                bills: {
+                    title: 'Pay Bills',
+                    content: `
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Bill Type</label>
+                                <select id="billType" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                                    <option value="electricity">Electricity</option>
+                                    <option value="water">Water</option>
+                                    <option value="internet">Internet</option>
+                                    <option value="phone">Phone</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Account Number</label>
+                                <input type="text" id="accountNumber" class="w-full px-3 py-2 border border-gray-300 rounded-lg" placeholder="Enter account number">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Amount</label>
+                                <input type="number" id="billAmount" class="w-full px-3 py-2 border border-gray-300 rounded-lg" placeholder="Enter amount">
+                            </div>
+                        </div>
+                    `
+                },
+                crypto: {
+                    title: 'Trade Cryptocurrency',
+                    content: `
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">From Currency</label>
+                                <select id="fromCurrency" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                                    <option value="USD">USD</option>
+                                    <option value="BTC">Bitcoin</option>
+                                    <option value="ETH">Ethereum</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">To Currency</label>
+                                <select id="toCurrency" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                                    <option value="BTC">Bitcoin</option>
+                                    <option value="ETH">Ethereum</option>
+                                    <option value="USD">USD</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Amount</label>
+                                <input type="number" id="cryptoAmount" class="w-full px-3 py-2 border border-gray-300 rounded-lg" placeholder="Enter amount">
+                            </div>
+                        </div>
+                    `
+                },
+                giftcard: {
+                    title: 'Trade Gift Cards',
+                    content: `
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Card Type</label>
+                                <select id="cardType" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                                    <option value="amazon">Amazon</option>
+                                    <option value="itunes">iTunes</option>
+                                    <option value="googleplay">Google Play</option>
+                                    <option value="steam">Steam</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Card Number</label>
+                                <input type="text" id="cardNumber" class="w-full px-3 py-2 border border-gray-300 rounded-lg" placeholder="Enter card number">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Card Value</label>
+                                <input type="number" id="cardValue" class="w-full px-3 py-2 border border-gray-300 rounded-lg" placeholder="Enter card value">
+                            </div>
+                        </div>
+                    `
+                },
+                p2p: {
+                    title: 'P2P Trading',
+                    content: `
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Transaction Type</label>
+                                <select id="p2pType" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                                    <option value="buy">Buy</option>
+                                    <option value="sell">Sell</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Currency</label>
+                                <select id="p2pCurrency" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                                    <option value="BTC">Bitcoin</option>
+                                    <option value="ETH">Ethereum</option>
+                                    <option value="USDT">USDT</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Amount</label>
+                                <input type="number" id="p2pAmount" class="w-full px-3 py-2 border border-gray-300 rounded-lg" placeholder="Enter amount">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Rate (USD)</label>
+                                <input type="number" id="p2pRate" class="w-full px-3 py-2 border border-gray-300 rounded-lg" placeholder="Enter rate">
+                            </div>
+                        </div>
+                    `
+                }
+            };
+
+            const config = serviceConfig[service];
+            modalTitle.textContent = config.title;
+            modalContent.innerHTML = config.content;
+            serviceModal.classList.remove('hidden');
+            serviceModal.classList.add('flex');
+        }
+
+        function closeModal() {
+            serviceModal.classList.add('hidden');
+            serviceModal.classList.remove('flex');
+            currentService = null;
+        }
+
+        async function handleServiceSubmit() {
+            if (!currentService) return;
+
+            try {
+                let endpoint = '';
+                let data = {};
+
+                switch (currentService) {
+                    case 'bills':
+                        endpoint = '/api/pay-bill';
+                        data = {
+                            billType: document.getElementById('billType').value,
+                            accountNumber: document.getElementById('accountNumber').value,
+                            amount: parseFloat(document.getElementById('billAmount').value)
+                        };
+                        break;
+                    case 'crypto':
+                        endpoint = '/api/trade-crypto';
+                        data = {
+                            fromCurrency: document.getElementById('fromCurrency').value,
+                            toCurrency: document.getElementById('toCurrency').value,
+                            amount: parseFloat(document.getElementById('cryptoAmount').value)
+                        };
+                        break;
+                    case 'giftcard':
+                        endpoint = '/api/trade-giftcard';
+                        data = {
+                            cardType: document.getElementById('cardType').value,
+                            cardNumber: document.getElementById('cardNumber').value,
+                            amount: parseFloat(document.getElementById('cardValue').value)
+                        };
+                        break;
+                    case 'p2p':
+                        endpoint = '/api/p2p';
+                        data = {
+                            type: document.getElementById('p2pType').value,
+                            currency: document.getElementById('p2pCurrency').value,
+                            amount: parseFloat(document.getElementById('p2pAmount').value),
+                            rate: parseFloat(document.getElementById('p2pRate').value)
+                        };
+                        break;
+                }
+
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    alert(`Success: ${result.message}`);
+                    closeModal();
+                } else {
+                    alert(`Error: ${result.error}`);
+                }
+            } catch (error) {
+                alert(`Error: ${error.message}`);
+            }
+        }
+
+        async function handlePayment() {
+            const amount = parseFloat(paymentAmount.value);
+            if (!amount || amount <= 0) {
+                alert('Please enter a valid amount');
+                return;
+            }
+
+            try {
+                // Create payment intent
+                const response = await fetch('/api/create-payment-intent', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ amount })
+                });
+
+                const { clientSecret } = await response.json();
+
+                // Show success message
+                paymentResult.innerHTML = `
+                    <div class="p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                        <p class="font-medium">Payment Intent Created!</p>
+                        <p class="text-sm">Client Secret: ${clientSecret.substring(0, 20)}...</p>
+                        <p class="text-sm mt-2">In a real application, you would now collect payment details using Stripe Elements.</p>
+                    </div>
+                `;
+                paymentResult.classList.remove('hidden');
+
+            } catch (error) {
+                paymentResult.innerHTML = `
+                    <div class="p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                        <p class="font-medium">Error creating payment: ${error.message}</p>
+                    </div>
+                `;
+                paymentResult.classList.remove('hidden');
+            }
+        }
+
+        // Check system status
+        async function checkStatus() {
+            try {
+                const response = await fetch('/api/health');
+                const status = await response.json();
+                console.log('System status:', status);
+            } catch (error) {
+                console.error('Status check failed:', error);
+            }
+        }
+
+        // Initialize
+        checkStatus();
+    </script>
+</body>
+</html>

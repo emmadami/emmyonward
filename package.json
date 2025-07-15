@@ -13,9 +13,11 @@
     "deploy:railway": "bash scripts/deploy.sh railway",
     "deploy:render": "bash scripts/deploy.sh render"
   "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "serverless-http": "^3.2.0",
     "stripe": "^12.18.0"
   },
   "devDependencies": {

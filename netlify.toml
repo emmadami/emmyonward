@@ -1,6 +1,6 @@
 [build]
   publish = "client/dist"
-  command = "cd client && npm install && npm run build"
+  command = "npm run build"
 
 [build.environment]
   NODE_VERSION = "18"
@@ -17,3 +17,4 @@
 
 [functions]
   directory = "netlify/functions"
+  node_bundler = "esbuild"
